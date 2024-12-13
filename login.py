@@ -13,3 +13,10 @@ try:
 except FileExistsError:
     print("File already exists.")
     log()
+
+#earn points random for login 
+def EarnPoint(time):
+    if (time?):
+        points = points + 10
+    ...
+    return points
