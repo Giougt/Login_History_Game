@@ -1,22 +1,49 @@
 import datetime
 import random
 
+# Point to add
 points = 0
-#earn points random for login 
-def EarnPoint(points):
-    points = random(10)
+# Point already have
+oldPoint = 0
+
+# Get old point in file
+def getLastPoints():
+    try:
+        with open('login_history.txt', 'r') as file:
+            lines = file.readlines()
+            if lines:
+                # Extract the last line and get the points
+                last_line = lines[-1]
+                # Assuming the last line format is "Date: YYYY-MM-DD Time: HH:MM:SS Point: X"
+                oldPoint = int(last_line.strip().split("Point: ")[1])
+                return oldPoint
+            else:
+                return 0  # No points if file is empty
+    except FileNotFoundError:
+        return 0  # No points if file does not exist
+
+# Earn points random for login
+def EarnPoint(oldPoint):
+    points = random.randint(1, 255)
+    points = points + oldPoint
     return points
 
+# Write in file
 def log():
     nowTime = datetime.datetime.now().strftime("%H:%M:%S")
     nowDate = datetime.datetime.now().date()
-    strLog = f"Date: {nowDate} Time: {nowTime}\n"
+    oldPoint = getLastPoints()
+    points = EarnPoint(oldPoint)
+    strLog = f"Date: {nowDate} Time: {nowTime} Point: {points}\n"
     with open('login_history.txt', 'a') as f:
         f.write(strLog)
+
 try:
     with open('login_history.txt', 'x') as file:
-        print("file create")
+        print("File created")
 except FileExistsError:
     print("File already exists.")
-    log()
-    EarnPoint()
+
+# Call log function to add a new entry
+log()
+
