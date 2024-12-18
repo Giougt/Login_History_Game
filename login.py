@@ -24,8 +24,12 @@ def getLastPoints():
 
 # Earn points random for login
 def EarnPoint(oldPoint):
-    points = random.randint(1, 255)
-    points = points + oldPoint
+    answer = str(input("Reset your point ? \"yes\" or \"no\""))
+    if answer == "no": 
+        points = random.randint(1, 255)
+        points = points + oldPoint
+    elif answer == "yes":
+        points = 0
     return points
 
 # Write in file
@@ -47,3 +51,14 @@ except FileExistsError:
 # Call log function to add a new entry
 log()
 
+def menu():
+    answer = str(input("What you want to do ? \n Play a game ..."))
+    match answer :
+        case _ if answer == 1:
+            return gameOne()
+    match answer :
+        case _ if answer == 2:
+            return gameTwo()
+    match answer :
+        case _ if answer == 3:
+            return gameThree()
