@@ -23,21 +23,22 @@ def getLastPoints():
         return 0  # No points if file does not exist
 
 # Earn points random for login
-def EarnPoint(oldPoint):
+def ResetPoint(oldPoint, newPoint):
     answer = str(input("Reset your point ? \"yes\" or \"no\""))
     if answer == "no": 
-        points = random.randint(1, 255)
-        points = points + oldPoint
+        points = oldPoint + newPoint
+        print("success to add your new point")
     elif answer == "yes":
         points = 0
     return points
 
+
 # Write in file
-def maj():
+def maj(newPoint):
     nowTime = datetime.datetime.now().strftime("%H:%M:%S")
     nowDate = datetime.datetime.now().date()
     oldPoint = getLastPoints()
-    points = EarnPoint(oldPoint)
+    points = ResetPoint(oldPoint,newPoint)
     strLog = f"Date: {nowDate} Time: {nowTime} Point: {points}\n"
     with open('login_history.txt', 'a') as f:
         f.write(strLog)
@@ -52,18 +53,26 @@ except FileExistsError:
 def gameOne():
     #bingo 
     answer = random.randint(1,10)
-    user = int(input("Guest the number between 1 and 10"))
-    if answer == user:
-        pointE = random.randint(1,255)
-    if answer != user and compt > 3:
-        pointE = 0
-    return 
+    compt = 0
+    pointAll = 0
+    while compt < 3:
+        user = int(input("Guest the number between 1 and 10"))
+        print("answer", answer)
+        if answer == user:
+            pointE = random.randint(1,255)
+            pointAll = pointE + pointAll
+            compt = compt + 1
+            break
+        if answer != user:
+            compt = compt + 1
+            print("False")
+    print("you earn",pointAll)
+    return maj(pointAll)
 
 def menu():
-    maj()
     answer = str(input("What you want to do ? \n Play a game ..."))
     match answer :
-        case _ if answer == 1:
+        case _ if answer == "bingo":
             return gameOne()
     match answer :
         case _ if answer == 2:
