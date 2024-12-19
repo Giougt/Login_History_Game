@@ -33,7 +33,7 @@ def EarnPoint(oldPoint):
     return points
 
 # Write in file
-def log():
+def maj():
     nowTime = datetime.datetime.now().strftime("%H:%M:%S")
     nowDate = datetime.datetime.now().date()
     oldPoint = getLastPoints()
@@ -48,10 +48,19 @@ try:
 except FileExistsError:
     print("File already exists.")
 
-# Call log function to add a new entry
-log()
+
+def gameOne():
+    #bingo 
+    answer = random.randint(1,10)
+    user = int(input("Guest the number between 1 and 10"))
+    if answer == user:
+        pointE = random.randint(1,255)
+    if answer != user and compt > 3:
+        pointE = 0
+    return 
 
 def menu():
+    maj()
     answer = str(input("What you want to do ? \n Play a game ..."))
     match answer :
         case _ if answer == 1:
@@ -62,3 +71,7 @@ def menu():
     match answer :
         case _ if answer == 3:
             return gameThree()
+
+
+#start menu 
+menu()
