@@ -1,10 +1,15 @@
 import datetime
 import random
-
+import time 
 # Point to add
 points = 0
 # Point already have
 oldPoint = 0
+
+#win points
+def winPoint():
+    pointwin = random.randint(1,255)
+    return pointwin
 
 # Get old point in file
 def getLastPoints():
@@ -57,9 +62,9 @@ def gameOne():
     pointAll = 0
     while compt < 3:
         user = int(input("Guest the number between 1 and 10"))
-        print("answer", answer)
         if answer == user:
-            pointE = random.randint(1,255)
+            print("Nice you win")
+            pointE = winPoint()
             pointAll = pointE + pointAll
             compt = compt + 1
             break
@@ -69,13 +74,46 @@ def gameOne():
     print("you earn",pointAll)
     return maj(pointAll)
 
+
+def gameTwo():
+    #timing 
+    #const
+    pointAll = 0
+    pointE = 0
+    timeToFind = random.randint(10,20)*1000
+    # +1s and -1s
+    timeToFindMid1 = timeToFind - 1000
+    timeToFindMid2 = timeToFind + 1000
+    #part game
+    a = input("you must stop the time after"+str(timeToFind/1000)+"secondes, the time start when you press any touch")
+    timeBegin = time.time()
+    b = input("the timer stop when you press any touch")
+    timeToStopUser = time.time()
+    timeToStop = (timeToStopUser - timeBegin)*1000
+    print("time to find", timeToFind)
+    print("your time",timeToStop)
+    #check response
+    if timeToFindMid1 < timeToStop < timeToFindMid2 : 
+        pointE = winPoint()
+        pointAll = pointE + pointAll
+        print("you win this game and earn",pointAll,"points")
+    else:
+        print("You loose , you earn ",pointE,"point, sorry")
+    return maj(pointAll)
+
+
+def gameThree():
+    #
+    pointAll = 0
+    return maj(pointAll)
+
 def menu():
-    answer = str(input("What you want to do ? \n Play a game ..."))
+    answer = str(input("What you want to do ? \n 1_ bingo \n 2_timing \n  3_..."))
     match answer :
         case _ if answer == "bingo":
             return gameOne()
     match answer :
-        case _ if answer == 2:
+        case _ if answer == "timing":
             return gameTwo()
     match answer :
         case _ if answer == 3:
