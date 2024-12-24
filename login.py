@@ -85,9 +85,9 @@ def gameTwo():
     timeToFindMid1 = timeToFind - 1000
     timeToFindMid2 = timeToFind + 1000
     #part game
-    a = input("you must stop the time after"+str(timeToFind/1000)+"secondes, the time start when you press any touch")
+    a = input("you must stop the time after"+str(timeToFind/1000)+"secondes, the time start when you press the touch enter")
     timeBegin = time.time()
-    b = input("the timer stop when you press any touch")
+    b = input("the timer stop when you press the touch enter")
     timeToStopUser = time.time()
     timeToStop = (timeToStopUser - timeBegin)*1000
     print("time to find", timeToFind)
@@ -103,20 +103,44 @@ def gameTwo():
 
 
 def gameThree():
-    #
+    #calculate
+    # const
     pointAll = 0
+    pointE = 0
+    number1 = random.randint(1,255)
+    number2 = random.randint(1,255)
+    operationRandom = random.randint(1,4)
+    match operationRandom:
+        case _ if operationRandom == 1:
+            correctResponse = number1 + number2
+            response = int(input("Calcul this addition"+str(number1)+"+"+str(number2)))
+        case _ if operationRandom == 2:
+            correctResponse = number1 - number2
+            response = int(input("Calcul this soustraction"+str(number1)+"-"+str(number2)))
+        case _ if operationRandom == 3:
+            correctResponse = number1 * number2
+            response = int(input("Calcul this multiplication"+str(number1)+"x"+str(number2)))
+        case _ if operationRandom == 4:
+            division = number1 / number2
+            correctResponse = int(round(division,0))
+            response = int(input("Calcul this division"+str(number1)+"/"+str(number2)))
+    if response == correctResponse: 
+        pointE = winPoint()
+        pointAll = pointE + pointAll
+        print("you win this game and earn",pointAll,"points")
+    else:
+        print("You loose , you earn ",pointE,"point, sorry")
     return maj(pointAll)
 
+
 def menu():
-    answer = str(input("What you want to do ? \n 1_ bingo \n 2_timing \n  3_..."))
+    answer = str(input("What you want to do ? \n 1_ bingo \n 2_timing \n  3_calculate"))
     match answer :
         case _ if answer == "bingo":
             return gameOne()
-    match answer :
         case _ if answer == "timing":
             return gameTwo()
-    match answer :
-        case _ if answer == 3:
+        case _ if answer == "calculate":
             return gameThree()
 
 
