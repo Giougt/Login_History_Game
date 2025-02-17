@@ -135,6 +135,30 @@ def gameThree():
 def gameFour():
     pointAll = 0
     pointE = 0
+    word_list_guess = ["qui ","ont","profondément", "modifié", "la", "Capitale", "en", "lui", "donnant", "le" ,"visage" ,"on", "lui", "connait", "de", "nos", "jours", "tout" ,"en", "laissant","subsister", "des", "pans" ,"du" ,"tissu", "urbain", "antérieur", "au", "cours", "du", "siecle", "la", "physionomie", "de", "Paris", "a" ,"continue", "se", "transformer", "avec", "la", "mise", "en"]
+    # random word to guess
+    answer_guess = word_list_guess[random.randint(0,42)]
+    # number of guess
+    number_guess = len(answer_guess)
+    split_word = list(answer_guess)
+    word_actually = [""]
+    #loop complete _ for word
+    for ele in range(answer_guess):
+        word_actually =  word_actually + "_"
+    #debug
+    print(split_word)
+    number_player_guess = 0
+    for ele in range(number_guess):
+        letter_answer = str(input("give one letter"))
+        # compt how many guess
+        number_player_guess = number_player_guess + 1
+        if letter_answer in split_word:
+            pointE = winPoint()
+            pointAll = pointE + pointAll
+            print("nice guess , you find a correct letter")
+            print(word_actually)
+        else:
+            print("False, you don't find a correct letter")
     return maj(pointAll)
 
 
