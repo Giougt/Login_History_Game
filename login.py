@@ -132,9 +132,14 @@ def gameThree():
         print("You loose , you earn ",pointE,"point, sorry")
     return maj(pointAll)
 
+def gameFour():
+    pointAll = 0
+    pointE = 0
+    return maj(pointAll)
+
 
 def menu():
-    answer = str(input("What you want to do ? \n 1_ bingo \n 2_timing \n  3_calculate"))
+    answer = str(input("What you want to do ? \n 1_ bingo \n 2_timing \n  3_calculate \n  4_guess word \n 5_exit"))
     match answer :
         case _ if answer == "bingo":
             return gameOne()
@@ -142,6 +147,14 @@ def menu():
             return gameTwo()
         case _ if answer == "calculate":
             return gameThree()
+        case _ if answer == "guess word":
+            return gameFour()
+        case _ :
+            answer_exit = str(input("You want to exit ? \n Yes or No"))
+            if answer_exit == "Yes":
+                return 0
+            else:
+                print("no exit sucess")
 
 
 #start menu 
