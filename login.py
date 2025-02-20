@@ -146,13 +146,17 @@ def gameFour():
         number_guess = len(answer_guess) + 6
     # check and remove letter to check 
     split_word = list(answer_guess)
-    word_actually = "Your answer : " + " "
-    #loop complete _ for word
+    word_actually = ["Your answer : " ]
+    #loop complete _ for word answer
     for ele in range(len(answer_guess)):
-        word_actually =  word_actually + "_ " 
+        word_actually.append("_ ")
     #debug
     print(split_word)
-    print(word_actually)
+    # print the word (answer)
+    form_answer = ""
+    for ele in word_actually:
+        form_answer = form_answer + ele 
+    # number of input loop
     for ele in range(number_guess):
         letter_answer = str(input("give one letter"))
         # compt how many guess
@@ -164,8 +168,10 @@ def gameFour():
             #find index to spot letter
             index_letter = 0
             index_letter = answer_guess.index(letter_answer)
+            #debug
             print(index_letter)
             print(word_actually)
+            print(form_answer)
         else:
             print("False, you don't find a correct letter, number of guess left", number_guess)
     return maj(pointAll)
