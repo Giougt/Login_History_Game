@@ -132,13 +132,14 @@ def gameThree():
         print("You loose , you earn ",pointE,"point, sorry")
     return maj(pointAll)
 
+
 def gameFour():
     # guest word
     pointAll = 0
     pointE = 0
     word_list_guess = ["qui ","ont","profondément", "modifié", "la", "capitale", "en", "lui", "donnant", "le" ,"visage" ,"on", "lui", "connait", "de", "nos", "jours", "tout" ,"en", "laissant","subsister", "des", "pans" ,"du" ,"tissu", "urbain", "antérieur", "au", "cours", "du", "siecle", "la", "physionomie", "de", "Paris", "a" ,"continue", "se", "transformer", "avec", "la", "mise", "en"]
     # random word to guess
-    answer_guess = word_list_guess[random.randint(0,42)]
+    answer_guess = random.choice(word_list_guess)
     # number of guess
     number_guess = 10
     # word are long , + guess 
@@ -146,34 +147,45 @@ def gameFour():
         number_guess = len(answer_guess) + 6
     # check and remove letter to check 
     split_word = list(answer_guess)
-    word_actually = ["Your answer : " ]
     #loop complete _ for word answer
+    word_actually_user = []
     for ele in range(len(answer_guess)):
-        word_actually.append("_ ")
+        word_actually_user.append("_ ")
+    #loop complete string for check answer list
+    word_check_correct = []
+    for element in split_word:
+        word_check_correct.append(element)
     #debug
-    print(split_word)
-    # print the word (answer)
-    form_answer = ""
-    for ele in word_actually:
-        form_answer = form_answer + ele 
+    print(word_check_correct)
+    print(word_actually_user)
+    #game part
     # number of input loop
     for ele in range(number_guess):
-        letter_answer = str(input("give one letter"))
-        # compt how many guess
-        number_guess = number_guess - 1
-        if letter_answer in split_word:
-            pointE = winPoint()
-            pointAll = pointE + pointAll
-            print("nice guess , you find a correct letter , number of guess left", number_guess)
-            #find index to spot letter
-            index_letter = 0
-            index_letter = answer_guess.index(letter_answer)
-            #debug
-            print(index_letter)
-            print(word_actually)
-            print(form_answer)
-        else:
-            print("False, you don't find a correct letter, number of guess left", number_guess)
+            letter_answer = str(input("give one letter"))
+            # compt how many guess
+            number_guess = number_guess - 1
+            if letter_answer in split_word:
+                pointE = winPoint()
+                pointAll = pointE + pointAll
+                print("nice guess , you find a correct letter , number of guess left", number_guess)
+                #find index to spot letter
+                index_letter = 0
+                index_letter = answer_guess.index(letter_answer)
+                #test loop
+                for i, letter in enumerate(split_word):
+                    if letter == letter_answer:
+                        word_actually_user[i] = letter_answer
+                #debug
+                print(index_letter)
+                print("Your answer :", " ".join(word_actually_user))
+            else:
+                print("False, you don't find a correct letter, number of guess left", number_guess)
+
+            # wrong way , bug 
+            if "_ " not in word_actually_user:
+                print("\nGood ! You find the word :", answer_guess,"you earn",pointAll,"points.")
+            if "_ " in word_actually_user:
+                print("\nSorry ! The word was :", answer_guess,"you earn",pointAll,"points.")
     return maj(pointAll)
 
 
