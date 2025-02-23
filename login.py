@@ -159,8 +159,13 @@ def gameFour():
     print(word_check_correct)
     print(word_actually_user)
     #game part
+    #count good answer
+    check_count = 0
     # number of input loop
     for ele in range(number_guess):
+            if check_count == len(answer_guess):
+                print("\nGood ! You find the word :", answer_guess,"you earn",pointAll,"points.")
+                return maj(pointAll)
             letter_answer = str(input("give one letter"))
             # compt how many guess
             number_guess = number_guess - 1
@@ -178,15 +183,16 @@ def gameFour():
                 #debug
                 print(index_letter)
                 print("Your answer :", " ".join(word_actually_user))
+                check_count = check_count + 1
             else:
                 print("False, you don't find a correct letter, number of guess left", number_guess)
-
+    return maj(pointAll)
+""" 
             # wrong way , bug 
-            if "_ " not in word_actually_user:
-                print("\nGood ! You find the word :", answer_guess,"you earn",pointAll,"points.")
             if "_ " in word_actually_user:
                 print("\nSorry ! The word was :", answer_guess,"you earn",pointAll,"points.")
-    return maj(pointAll)
+"""
+            
 
 
 def menu():
